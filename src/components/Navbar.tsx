@@ -1,5 +1,9 @@
 'use client'
+import Link from "next/link";
 import ThemeSwitch from "./ThemeSwitch";
+import { dataMenu } from "@/types/data";
+import { iconMap } from "@/types/types";
+
 
 export default function Navbar() {
     return (
@@ -28,8 +32,20 @@ export default function Navbar() {
                         <ul className="menu menu-horizontal">
                             <ThemeSwitch />
                             {/* Navbar menu content here */}
-                            <li><a>Navbar Item 1</a></li>
-                            <li><a>Navbar Item 2</a></li>
+                            {dataMenu.map((item) => {
+                                const Icon = iconMap[item.icon];
+                                return(
+                                    <li key={item.id}>
+                                        <Link href={item.link}>
+                                            <div className="flex gap-2 items-center">
+                                                <span className="">{Icon && <Icon />}</span>
+                                                {/* renderizar icone aqui */}
+                                                <p className="font-bold">{item.titulo}</p>
+                                            </div>
+                                        </Link>
+                                    </li>
+                                )
+                            }) }
                         </ul>
                     </div>
                 </div>
@@ -38,8 +54,21 @@ export default function Navbar() {
                 <label htmlFor="my-drawer-3" aria-label="close sidebar" className="drawer-overlay"></label>
                 <ul className="menu bg-base-200 min-h-full w-80 p-4">
                     {/* Sidebar content here */}
-                    <li><a>Sidebar Item 1</a></li>
-                    <li><a>Sidebar Item 2</a></li>
+                    {dataMenu.map((item) => {
+                                const Icon = iconMap[item.icon];
+                                return(
+                                    <li key={item.id}>
+                                        <Link href={item.link}>
+                                            <div className="flex gap-2 items-center">
+                                                <span className="">{Icon && <Icon />}</span>
+                                                {/* renderizar icone aqui */}
+                                                <p className="font-bold">{item.titulo}</p>
+                                            </div>
+                                        </Link>
+                                    </li>
+                                )
+                            }) }
+                    <ThemeSwitch />
                 </ul>
             </div>
         </div>
